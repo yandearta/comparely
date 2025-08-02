@@ -51,6 +51,7 @@ export default tseslint.config(
             'src/app/**/page.tsx',
             'src/app/**/layout.tsx',
             'src/app/**/error.tsx',
+            'src/app/**/global-error.tsx',
             'src/app/**/not-found.tsx',
             'src/app/**/unauthorized.tsx',
         ],

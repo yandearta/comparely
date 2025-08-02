@@ -1,0 +1,232 @@
+'use client';
+
+import { BarChart3, Copy, Edit, Play, Trash2 } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
+
+import { EditSessionForm } from '@/components/edit-session-form';
+import { LoadingCard } from '@/components/loading';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import { useSessionActions, useSessions } from '@/hooks/use-database';
+import { dayjs } from '@/lib/dayjs';
+import type { VotingSession } from '@/lib/db';
+
+export function SessionsList() {
+    const sessions = useSessions();
+    const { deleteSession, duplicateSession } = useSessionActions();
+    const router = useRouter();
+
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [sessionToDelete, setSessionToDelete] = useState<number | null>(null);
+    const [editDialogOpen, setEditDialogOpen] = useState(false);
+    const [sessionToEdit, setSessionToEdit] = useState<VotingSession | null>(null);
+
+    function formatCreatedAt(createdAt: unknown) {
+        try {
+            return dayjs(createdAt as dayjs.ConfigType).fromNow();
+        } catch {
+            return 'Nggak tau kapan';
+        }
+    }
+
+    // Loading state
+    if (sessions === undefined) {
+        return (
+            <div className="w-full max-w-4xl mx-auto space-y-4">
+                <div className="flex items-center justify-between">
+                    <h2 className="text-2xl font-semibold">Sesi Kamu</h2>
+                </div>
+                <div className="grid gap-4">
+                    {[1, 2, 3].map((i) => (
+                        <LoadingCard key={i} />
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
+    if (!sessions || sessions.length === 0) {
+        return (
+            <Card className="w-full max-w-2xl mx-auto">
+                <CardContent className="flex flex-col items-center justify-center py-12">
+                    <div className="text-center space-y-2">
+                        <h3 className="text-lg font-semibold">Belum ada apa-apa nih</h3>
+                        <p className="text-muted-foreground">Yuk bikin yang pertama!</p>
+                    </div>
+                </CardContent>
+            </Card>
+        );
+    }
+
+    // Sort: running first, then finished
+    const sortedSessions = [...sessions].sort((a, b) => {
+        if (a.isCompleted === b.isCompleted) {
+            return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+        }
+        return a.isCompleted ? 1 : -1;
+    });
+
+    async function handleDelete() {
+        if (sessionToDelete) {
+            await deleteSession(sessionToDelete);
+            setDeleteDialogOpen(false);
+            setSessionToDelete(null);
+        }
+    }
+
+    function handleEdit(session: VotingSession) {
+        setSessionToEdit(session);
+        setEditDialogOpen(true);
+    }
+
+    function handleEditSuccess() {
+        setEditDialogOpen(false);
+        setSessionToEdit(null);
+    }
+
+    function handleEditCancel() {
+        setEditDialogOpen(false);
+        setSessionToEdit(null);
+    }
+
+    async function handleDuplicate(sessionId: number) {
+        const newSession = await duplicateSession(sessionId);
+        toast.success('Sip, udah diduplikat!');
+        router.push(`/${newSession.slug}`);
+    }
+
+    function openDeleteDialog(sessionId: number) {
+        setSessionToDelete(sessionId);
+        setDeleteDialogOpen(true);
+    }
+
+    return (
+        <>
+            <div className="w-full max-w-4xl mx-auto space-y-4">
+                <div className="flex items-center justify-between">
+                    <h2 className="text-2xl font-semibold">Sesi Kamu</h2>
+                </div>
+
+                <div className="grid gap-4">
+                    {sortedSessions.map((session) => (
+                        <Card key={session.id} className="hover:shadow-md transition-shadow">
+                            <CardHeader className="pb-3">
+                                <div className="flex items-start justify-between">
+                                    <div className="space-y-1">
+                                        <CardTitle className="text-lg">{session.title}</CardTitle>
+                                        <CardDescription>
+                                            {session.items.length} item • Dibuat {formatCreatedAt(session.createdAt)}
+                                        </CardDescription>
+                                    </div>
+                                    <Badge variant={session.isCompleted ? 'default' : 'secondary'}>
+                                        {session.isCompleted ? 'Selesai' : 'Berjalan'}
+                                    </Badge>
+                                </div>
+                            </CardHeader>
+
+                            <CardContent className="pt-0">
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    {session.items.slice(0, 3).map((item, index) => (
+                                        <Badge key={index} variant="outline" className="text-xs">
+                                            {item}
+                                        </Badge>
+                                    ))}
+                                    {session.items.length > 3 && (
+                                        <Badge variant="outline" className="text-xs">
+                                            +{session.items.length - 3} lagi
+                                        </Badge>
+                                    )}
+                                </div>
+
+                                <div className="flex gap-2 flex-wrap">
+                                    <Button size="sm" asChild>
+                                        <Link href={`/${session.slug}`}>
+                                            {session.isCompleted ? (
+                                                <>
+                                                    <BarChart3 />
+                                                    Lihat Hasil
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Play />
+                                                    Lanjut
+                                                </>
+                                            )}
+                                        </Link>
+                                    </Button>
+
+                                    <Button
+                                        size="sm"
+                                        variant="outline"
+                                        onClick={() => session.id && handleDuplicate(session.id)}
+                                    >
+                                        <Copy />
+                                        Duplikat
+                                    </Button>
+
+                                    <Button size="sm" variant="outline" onClick={() => handleEdit(session)}>
+                                        <Edit />
+                                        Edit
+                                    </Button>
+
+                                    <Button
+                                        size="sm"
+                                        variant="outline"
+                                        onClick={() => session.id && openDeleteDialog(session.id)}
+                                        className="text-destructive hover:text-destructive"
+                                    >
+                                        <Trash2 />
+                                        Hapus
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+
+            <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Hapus Sesi</DialogTitle>
+                        <DialogDescription>
+                            Yakin mau hapus sesi voting ini? Aksi ini tidak bisa dibatalkan.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+                            Batal
+                        </Button>
+                        <Button variant="destructive" onClick={handleDelete}>
+                            Hapus
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+                <DialogContent>
+                    {sessionToEdit && (
+                        <EditSessionForm
+                            session={sessionToEdit}
+                            onSuccess={handleEditSuccess}
+                            onCancel={handleEditCancel}
+                        />
+                    )}
+                </DialogContent>
+            </Dialog>
+        </>
+    );
+}
