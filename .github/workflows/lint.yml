@@ -1,0 +1,53 @@
+name: linter
+
+on:
+    push:
+        branches:
+            - develop
+            - main
+    pull_request:
+        branches:
+            - develop
+            - main
+
+permissions:
+    contents: write
+
+jobs:
+    quality:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  run_install: false
+
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 23
+                  cache: 'pnpm'
+
+            - name: Install Dependencies
+              run: pnpm install
+
+            - name: Format
+              run: pnpm format:write
+
+            - name: Lint
+              run: pnpm lint:fix
+              env:
+                  SKIP_ENV_VALIDATION: true
+
+            - name: Typecheck
+              run: pnpm typecheck
+              env:
+                  SKIP_ENV_VALIDATION: true
+
+            - name: Commit Changes
+              uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                  commit_message: 'style: fix code style [skip ci]'
+                  commit_options: '--no-verify'
