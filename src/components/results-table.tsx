@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useSessionActions, useSessionBySlug, useSessionResults } from '@/hooks/use-database';
+import { cn } from '@/lib/utils';
 
 type ResultsTableProps = {
     slug: string;
@@ -92,8 +93,8 @@ export function ResultsTable({ slug }: ResultsTableProps) {
                         Balik ke Beranda
                     </Link>
                 </Button>
-                <div>
-                    <h1 className="text-3xl font-bold">{session.title}</h1>
+                <div className="min-w-0">
+                    <h1 className="text-3xl font-bold break-words">{session.title}</h1>
                     <p className="text-muted-foreground">Hasil Akhir</p>
                 </div>
             </div>
@@ -106,7 +107,9 @@ export function ResultsTable({ slug }: ResultsTableProps) {
                             {getRankIcon(0)}
                             <CardTitle className="text-2xl">Pemenang!</CardTitle>
                         </div>
-                        <div className="mb-2 text-4xl font-bold text-yellow-600">{results[0].item}</div>
+                        <div className="mb-2 min-w-0">
+                            <p className="text-4xl font-bold break-words text-yellow-600">{results[0].item}</p>
+                        </div>
                         <div className="text-muted-foreground text-lg">
                             Win Rate: {results[0].winRate}% ({results[0].wins}/{results[0].appearances})
                         </div>
@@ -132,7 +135,7 @@ export function ResultsTable({ slug }: ResultsTableProps) {
                         </TableHeader>
                         <TableBody>
                             {results?.map((result, index) => (
-                                <TableRow key={result.item} className={index < 3 ? 'bg-muted/20' : ''}>
+                                <TableRow key={result.item} className={cn({ 'bg-muted/20': index < 3 })}>
                                     <TableCell>
                                         <div className="flex items-center gap-2">
                                             {getRankIcon(index)}

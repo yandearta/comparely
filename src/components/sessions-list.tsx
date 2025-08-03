@@ -122,9 +122,9 @@ export function SessionsList() {
                     {sortedSessions.map((session) => (
                         <Card key={session.id} className="transition-shadow hover:shadow-md">
                             <CardHeader className="pb-3">
-                                <div className="flex items-start justify-between">
-                                    <div className="space-y-1">
-                                        <CardTitle className="text-lg">{session.title}</CardTitle>
+                                <div className="flex min-w-0 items-start justify-between">
+                                    <div className="min-w-0 space-y-1">
+                                        <CardTitle className="text-lg break-words">{session.title}</CardTitle>
                                         <CardDescription>
                                             {session.items.length} item • Dibuat {formatCreatedAt(session.createdAt)}
                                         </CardDescription>
@@ -138,8 +138,8 @@ export function SessionsList() {
                             <CardContent className="pt-0">
                                 <div className="mb-4 flex flex-wrap gap-2">
                                     {session.items.slice(0, 3).map((item, index) => (
-                                        <Badge key={index} variant="outline" className="text-xs">
-                                            {item}
+                                        <Badge key={index} variant="outline" className="max-w-60 text-xs">
+                                            <span className="truncate">{item}</span>
                                         </Badge>
                                     ))}
                                     {session.items.length > 3 && (

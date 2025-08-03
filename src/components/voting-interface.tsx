@@ -178,8 +178,8 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                         Undo
                     </Button>
                 </div>
-                <div>
-                    <h1 className="text-2xl font-semibold">{session.title}</h1>
+                <div className="min-w-0">
+                    <h1 className="text-2xl font-semibold break-words">{session.title}</h1>
                     <p className="text-muted-foreground">Pilih yang mana nih yang kamu lebih suka?</p>
                 </div>
             </div>
@@ -272,8 +272,8 @@ function VotingCard({ label, item, onVote, ariaLabel }: VotingCardProps) {
                 </div>
             </CardHeader>
             <CardContent>
-                <div className="py-8 text-center">
-                    <h2 className="mb-4 text-xl font-semibold">{item}</h2>
+                <div className="min-w-0 py-8 text-center">
+                    <h2 className="mb-4 text-xl font-semibold break-words">{item}</h2>
                     <Button
                         onClick={onVote}
                         className="w-full transition-transform group-hover:scale-105"
