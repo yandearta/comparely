@@ -55,6 +55,7 @@ export default tseslint.config(
             'src/app/**/not-found.tsx',
             'src/app/**/unauthorized.tsx',
             'src/app/**/icon.tsx',
+            'src/app/**/opengraph-image.tsx',
         ],
         rules: {
             'import/no-default-export': 'off',
