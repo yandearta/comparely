@@ -100,7 +100,7 @@ export function ResultsTable({ slug }: ResultsTableProps) {
 
             {/* Winner Card */}
             {results && results.length > 0 && results[0] && (
-                <Card className="border-2 border-yellow-200 bg-yellow-50/50">
+                <Card className="border-2 border-yellow-300 bg-yellow-50">
                     <CardHeader className="text-center">
                         <div className="mb-2 flex items-center justify-center gap-2">
                             {getRankIcon(0)}

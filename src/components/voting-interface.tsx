@@ -210,7 +210,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                     </CardHeader>
                     <CardContent>
                         <div className="py-8 text-center">
-                            <h3 className="mb-4 text-xl font-semibold">{nextComparison.itemA}</h3>
+                            <h2 className="mb-4 text-xl font-semibold">{nextComparison.itemA}</h2>
                             <Button
                                 onClick={() => handleVote(nextComparison.itemA)}
                                 className="w-full transition-transform group-hover:scale-105"
@@ -231,7 +231,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                     </CardHeader>
                     <CardContent>
                         <div className="py-8 text-center">
-                            <h3 className="mb-4 text-xl font-semibold">{nextComparison.itemB}</h3>
+                            <h2 className="mb-4 text-xl font-semibold">{nextComparison.itemB}</h2>
                             <Button
                                 onClick={() => handleVote(nextComparison.itemB)}
                                 className="w-full transition-transform group-hover:scale-105"
