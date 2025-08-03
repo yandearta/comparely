@@ -1,4 +1,5 @@
 import { CreateSessionForm } from '@/components/create-session-form';
+import { Footer } from '@/components/footer';
 import { SessionsList } from '@/components/sessions-list';
 
 export default function HomePage() {
@@ -25,6 +26,8 @@ export default function HomePage() {
                 <section>
                     <SessionsList />
                 </section>
+
+                <Footer />
             </div>
         </main>
     );
