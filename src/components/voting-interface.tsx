@@ -38,11 +38,11 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
     );
 
     const handleUndo = useCallback(async () => {
-        if (!sessionId) return;
+        if (!sessionId || !progress || progress.completed === 0) return;
 
         await undoLastVote(sessionId);
         toast.success('Oke, udah di-undo!');
-    }, [sessionId, undoLastVote]);
+    }, [progress, sessionId, undoLastVote]);
 
     // Reset completion message when there's a new comparison available
     useEffect(() => {
@@ -202,53 +202,24 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
 
             {/* Voting Cards */}
             <div className="grid gap-6 md:grid-cols-2">
-                <Card className="group cursor-pointer transition-shadow hover:shadow-lg">
-                    <CardHeader className="pb-2">
-                        <div className="flex items-center justify-between">
-                            <Badge variant="outline">Opsi A (1)</Badge>
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="py-8 text-center">
-                            <h2 className="mb-4 text-xl font-semibold">{nextComparison.itemA}</h2>
-                            <Button
-                                onClick={() => handleVote(nextComparison.itemA)}
-                                className="w-full transition-transform group-hover:scale-105"
-                                size="lg"
-                                aria-label={`Choose ${nextComparison.itemA} (Press 1 or left arrow)`}
-                            >
-                                Pilih yang Ini
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
-
-                <Card className="group cursor-pointer transition-shadow hover:shadow-lg">
-                    <CardHeader className="pb-2">
-                        <div className="flex items-center justify-between">
-                            <Badge variant="outline">Opsi B (2)</Badge>
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="py-8 text-center">
-                            <h2 className="mb-4 text-xl font-semibold">{nextComparison.itemB}</h2>
-                            <Button
-                                onClick={() => handleVote(nextComparison.itemB)}
-                                className="w-full transition-transform group-hover:scale-105"
-                                size="lg"
-                                aria-label={`Choose ${nextComparison.itemB} (Press 2 or right arrow)`}
-                            >
-                                Pilih yang Ini
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
+                <VotingCard
+                    label="Opsi A (1)"
+                    item={nextComparison.itemA}
+                    onVote={() => handleVote(nextComparison.itemA)}
+                    ariaLabel={`Choose ${nextComparison.itemA} (Press 1 or left arrow)`}
+                />
+                <VotingCard
+                    label="Opsi B (2)"
+                    item={nextComparison.itemB}
+                    onVote={() => handleVote(nextComparison.itemB)}
+                    ariaLabel={`Choose ${nextComparison.itemB} (Press 2 or right arrow)`}
+                />
             </div>
 
             {/* Instructions */}
-            <Card className="bg-muted/50">
+            <Card>
                 <CardContent className="py-4">
-                    <div className="text-muted-foreground space-y-2 text-center text-sm">
+                    <div className="space-y-2 text-center text-sm">
                         <p>
                             💡 <strong>Tips:</strong> Pilih dengan hati-hati ya. Tapi kalau salah, bisa di-undo kok.
                         </p>
@@ -282,5 +253,37 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                 </CardContent>
             </Card>
         </div>
+    );
+}
+
+type VotingCardProps = {
+    label: string;
+    item: string;
+    onVote: () => void;
+    ariaLabel: string;
+};
+
+function VotingCard({ label, item, onVote, ariaLabel }: VotingCardProps) {
+    return (
+        <Card className="group transition-shadow hover:shadow-lg">
+            <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                    <Badge variant="outline">{label}</Badge>
+                </div>
+            </CardHeader>
+            <CardContent>
+                <div className="py-8 text-center">
+                    <h2 className="mb-4 text-xl font-semibold">{item}</h2>
+                    <Button
+                        onClick={onVote}
+                        className="w-full transition-transform group-hover:scale-105"
+                        size="lg"
+                        aria-label={ariaLabel}
+                    >
+                        Pilih yang Ini
+                    </Button>
+                </div>
+            </CardContent>
+        </Card>
     );
 }
