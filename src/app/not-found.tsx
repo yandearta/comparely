@@ -11,15 +11,15 @@ export const metadata = {
 
 export default function NotFound() {
     return (
-        <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="flex min-h-screen items-center justify-center p-4">
             <Card className="w-full max-w-md">
-                <CardContent className="pt-6 text-center space-y-4">
+                <CardContent className="space-y-4 pt-6 text-center">
                     <div className="flex justify-center">
-                        <FileQuestion className="size-12 text-muted-foreground" />
+                        <FileQuestion className="text-muted-foreground size-12" />
                     </div>
                     <div className="space-y-2">
                         <h1 className="text-3xl font-bold">404</h1>
-                        <h2 className="text-xl font-semibold text-destructive">Halaman Tidak Ditemukan</h2>
+                        <h2 className="text-destructive text-xl font-semibold">Halaman Tidak Ditemukan</h2>
                     </div>
                     <p className="text-muted-foreground text-sm">
                         Halaman yang kamu cari tidak ada atau telah dipindahkan.

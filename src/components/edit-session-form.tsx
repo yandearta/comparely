@@ -97,7 +97,7 @@ export function EditSessionForm({ session, onSuccess, onCancel }: EditSessionFor
                                 <FormControl>
                                     <Textarea
                                         placeholder="Tulis setiap item di baris baru..."
-                                        className="min-h-32 max-h-40"
+                                        className="max-h-40 min-h-32"
                                         {...field}
                                     />
                                 </FormControl>

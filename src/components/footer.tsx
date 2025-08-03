@@ -4,7 +4,7 @@ import { Card, CardContent } from './ui/card';
 
 export function Footer() {
     return (
-        <footer className="w-full max-w-4xl mx-auto">
+        <footer className="mx-auto w-full max-w-4xl">
             <Card>
                 <CardContent>
                     <p>

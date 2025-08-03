@@ -5,15 +5,13 @@ import { SessionsList } from '@/components/sessions-list';
 export default function HomePage() {
     return (
         <main className="min-h-screen py-8">
-            <div className="container mx-auto px-4 space-y-12">
+            <div className="container mx-auto space-y-12 px-4">
                 {/* Header */}
-                <div className="text-center space-y-4">
-                    <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                        Comparely
-                    </h1>
-                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                        Buat keputusan sulit jadi lebih mudah dengan voting perbandingan berpasangan. Bandingkan item
-                        dua per dua untuk menemukan preferensi aslimu.
+                <div className="space-y-4 text-center">
+                    <h1 className="text-4xl font-bold md:text-6xl">Comparely</h1>
+                    <p className="text-muted-foreground mx-auto max-w-2xl text-xl">
+                        Kadang bingung milih karena kebanyakan pilihan? Bandingin pelan-pelan, satu lawan satu, biar
+                        nemu yang bener-bener cocok.
                     </p>
                 </div>
 

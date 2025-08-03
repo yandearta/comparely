@@ -7,7 +7,8 @@ import '@/styles/globals.css';
 
 export const metadata: Metadata = {
     title: 'Comparely — Biar Nggak Salah Pilih',
-    description: 'Nggak perlu ribet mikir, bandingin satu-satu sampe nemu yang paling pas buat kamu.',
+    description:
+        'Kadang bingung milih karena kebanyakan pilihan? Bandingin pelan-pelan, satu lawan satu, biar nemu yang bener-bener cocok.',
     icons: [{ rel: 'icon', url: '/favicon.ico' }],
 };
 

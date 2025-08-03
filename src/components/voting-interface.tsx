@@ -97,7 +97,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
     // Loading state
     if (session === undefined || progress === undefined) {
         return (
-            <div className="w-full max-w-4xl mx-auto">
+            <div className="mx-auto w-full max-w-4xl">
                 <LoadingSpinner message="Memuat..." />
             </div>
         );
@@ -105,7 +105,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
 
     if (!session) {
         return (
-            <Card className="w-full max-w-2xl mx-auto">
+            <Card className="mx-auto w-full max-w-2xl">
                 <CardContent className="flex items-center justify-center py-12">
                     <div className="text-center">
                         <h3 className="text-lg font-semibold">Eh, nggak ketemu</h3>
@@ -121,14 +121,14 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
 
     if (showCompletionMessage) {
         return (
-            <Card className="w-full max-w-2xl mx-auto">
+            <Card className="mx-auto w-full max-w-2xl">
                 <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                    <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
-                    <h2 className="text-2xl font-semibold mb-2">Voting Selesai!</h2>
+                    <CheckCircle className="mb-4 h-16 w-16 text-green-500" />
+                    <h2 className="mb-2 text-2xl font-semibold">Voting Selesai!</h2>
                     <p className="text-muted-foreground mb-4">
                         Semua perbandingan sudah selesai. Mengarahkan ke halaman hasil...
                     </p>
-                    <div className="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full" />
+                    <div className="border-primary h-4 w-4 animate-spin rounded-full border-2 border-t-transparent" />
                 </CardContent>
             </Card>
         );
@@ -136,14 +136,14 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
 
     if (!nextComparison) {
         return (
-            <Card className="w-full max-w-2xl mx-auto">
+            <Card className="mx-auto w-full max-w-2xl">
                 <CardContent className="flex items-center justify-center py-12">
                     <div className="text-center">
                         <h3 className="text-lg font-semibold">Udah selesai!</h3>
                         <p className="text-muted-foreground">Nggak ada lagi yang perlu dibandingin.</p>
-                        <div className="flex gap-2 mt-4 justify-center">
+                        <div className="mt-4 flex justify-center gap-2">
                             <Button asChild>
-                                <Link href={`/${slug}`}>Lihat Hasil</Link>
+                                <Link href={`/${slug}`}>Liat Hasil</Link>
                             </Button>
                             <Button variant="outline" asChild>
                                 <Link href="/">Balik ke Beranda</Link>
@@ -156,11 +156,11 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
     }
 
     return (
-        <div className="w-full max-w-4xl mx-auto space-y-6">
+        <div className="mx-auto w-full max-w-4xl space-y-6">
             {/* Header */}
             <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                    <div className="space-y-4 flex-1">
+                <div className="flex items-center justify-between">
+                    <div className="flex-1 space-y-4">
                         <Button variant="outline" size="sm" asChild>
                             <Link href="/">
                                 <ArrowLeft />
@@ -188,32 +188,32 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
             {progress && (
                 <Card>
                     <CardContent className="py-4">
-                        <div className="flex items-center justify-between mb-2">
+                        <div className="mb-2 flex items-center justify-between">
                             <span className="text-sm font-medium">Progress</span>
-                            <span className="text-sm text-muted-foreground">
+                            <span className="text-muted-foreground text-sm">
                                 {progress.completed} dari {progress.total}
                             </span>
                         </div>
                         <Progress value={progress.percentage} className="h-2" />
-                        <p className="text-xs text-muted-foreground mt-1">{progress.percentage}% selesai</p>
+                        <p className="text-muted-foreground mt-1 text-xs">{progress.percentage}% selesai</p>
                     </CardContent>
                 </Card>
             )}
 
             {/* Voting Cards */}
-            <div className="grid md:grid-cols-2 gap-6">
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
+            <div className="grid gap-6 md:grid-cols-2">
+                <Card className="group cursor-pointer transition-shadow hover:shadow-lg">
                     <CardHeader className="pb-2">
                         <div className="flex items-center justify-between">
                             <Badge variant="outline">Opsi A (1)</Badge>
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-center py-8">
-                            <h3 className="text-xl font-semibold mb-4">{nextComparison.itemA}</h3>
+                        <div className="py-8 text-center">
+                            <h3 className="mb-4 text-xl font-semibold">{nextComparison.itemA}</h3>
                             <Button
                                 onClick={() => handleVote(nextComparison.itemA)}
-                                className="w-full group-hover:scale-105 transition-transform"
+                                className="w-full transition-transform group-hover:scale-105"
                                 size="lg"
                                 aria-label={`Choose ${nextComparison.itemA} (Press 1 or left arrow)`}
                             >
@@ -223,18 +223,18 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                     </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
+                <Card className="group cursor-pointer transition-shadow hover:shadow-lg">
                     <CardHeader className="pb-2">
                         <div className="flex items-center justify-between">
                             <Badge variant="outline">Opsi B (2)</Badge>
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-center py-8">
-                            <h3 className="text-xl font-semibold mb-4">{nextComparison.itemB}</h3>
+                        <div className="py-8 text-center">
+                            <h3 className="mb-4 text-xl font-semibold">{nextComparison.itemB}</h3>
                             <Button
                                 onClick={() => handleVote(nextComparison.itemB)}
-                                className="w-full group-hover:scale-105 transition-transform"
+                                className="w-full transition-transform group-hover:scale-105"
                                 size="lg"
                                 aria-label={`Choose ${nextComparison.itemB} (Press 2 or right arrow)`}
                             >
@@ -248,7 +248,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
             {/* Instructions */}
             <Card className="bg-muted/50">
                 <CardContent className="py-4">
-                    <div className="text-sm text-center text-muted-foreground space-y-2">
+                    <div className="text-muted-foreground space-y-2 text-center text-sm">
                         <p>
                             💡 <strong>Tips:</strong> Pilih dengan hati-hati ya. Tapi kalau salah, bisa di-undo kok.
                         </p>
@@ -257,21 +257,21 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                             <p className="flex items-center justify-center gap-4 text-xs">
                                 <span>
                                     Tekan{' '}
-                                    <kbd className="px-1 py-0.5 bg-background border rounded text-foreground">1</kbd>{' '}
+                                    <kbd className="bg-background text-foreground rounded border px-1 py-0.5">1</kbd>{' '}
                                     atau{' '}
-                                    <kbd className="px-1 py-0.5 bg-background border rounded text-foreground">←</kbd>{' '}
+                                    <kbd className="bg-background text-foreground rounded border px-1 py-0.5">←</kbd>{' '}
                                     untuk Opsi A
                                 </span>
                                 <span>
                                     Tekan{' '}
-                                    <kbd className="px-1 py-0.5 bg-background border rounded text-foreground">2</kbd>{' '}
+                                    <kbd className="bg-background text-foreground rounded border px-1 py-0.5">2</kbd>{' '}
                                     atau{' '}
-                                    <kbd className="px-1 py-0.5 bg-background border rounded text-foreground">→</kbd>{' '}
+                                    <kbd className="bg-background text-foreground rounded border px-1 py-0.5">→</kbd>{' '}
                                     untuk Opsi B
                                 </span>
                                 <span>
                                     Tekan{' '}
-                                    <kbd className="px-1 py-0.5 bg-background border rounded text-foreground">
+                                    <kbd className="bg-background text-foreground rounded border px-1 py-0.5">
                                         Ctrl+U
                                     </kbd>{' '}
                                     untuk batalkan

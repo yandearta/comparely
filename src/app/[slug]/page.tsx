@@ -19,9 +19,9 @@ export default function SessionPage() {
 
     if (!session) {
         return (
-            <main className="min-h-screen flex items-center justify-center">
-                <div className="text-center space-y-2">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+            <main className="flex min-h-screen items-center justify-center">
+                <div className="space-y-2 text-center">
+                    <div className="border-primary mx-auto size-8 animate-spin rounded-full border-b-2"></div>
                     <p className="text-muted-foreground">Memuat sesi...</p>
                 </div>
             </main>

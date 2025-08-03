@@ -34,7 +34,7 @@ export function ResultsTable({ slug }: ResultsTableProps) {
 
     if (!session) {
         return (
-            <Card className="w-full max-w-2xl mx-auto">
+            <Card className="mx-auto w-full max-w-2xl">
                 <CardContent className="flex items-center justify-center py-12">
                     <div className="text-center">
                         <h3 className="text-lg font-semibold">Eh, nggak ketemu</h3>
@@ -83,7 +83,7 @@ export function ResultsTable({ slug }: ResultsTableProps) {
     }
 
     return (
-        <div className="w-full max-w-6xl mx-auto space-y-6">
+        <div className="mx-auto w-full max-w-6xl space-y-6">
             {/* Header */}
             <div className="space-y-4">
                 <Button variant="outline" size="sm" asChild>
@@ -102,12 +102,12 @@ export function ResultsTable({ slug }: ResultsTableProps) {
             {results && results.length > 0 && results[0] && (
                 <Card className="border-2 border-yellow-200 bg-yellow-50/50">
                     <CardHeader className="text-center">
-                        <div className="flex items-center justify-center gap-2 mb-2">
+                        <div className="mb-2 flex items-center justify-center gap-2">
                             {getRankIcon(0)}
                             <CardTitle className="text-2xl">Pemenang!</CardTitle>
                         </div>
-                        <div className="text-4xl font-bold text-yellow-600 mb-2">{results[0].item}</div>
-                        <div className="text-lg text-muted-foreground">
+                        <div className="mb-2 text-4xl font-bold text-yellow-600">{results[0].item}</div>
+                        <div className="text-muted-foreground text-lg">
                             Win Rate: {results[0].winRate}% ({results[0].wins}/{results[0].appearances})
                         </div>
                     </CardHeader>
@@ -145,9 +145,9 @@ export function ResultsTable({ slug }: ResultsTableProps) {
                                     <TableCell className="text-center">
                                         <div className="flex items-center justify-center gap-2">
                                             <span className="font-mono font-semibold">{result.winRate}%</span>
-                                            <div className="w-16 h-2 bg-muted rounded-full overflow-hidden">
+                                            <div className="bg-muted h-2 w-16 overflow-hidden rounded-full">
                                                 <div
-                                                    className="h-full bg-primary transition-all duration-300"
+                                                    className="bg-primary h-full transition-all duration-300"
                                                     style={{ width: `${result.winRate}%` }}
                                                 />
                                             </div>
@@ -163,7 +163,7 @@ export function ResultsTable({ slug }: ResultsTableProps) {
             {/* Actions */}
             <Card>
                 <CardContent className="py-6">
-                    <div className="flex flex-wrap gap-3 justify-center">
+                    <div className="flex flex-wrap justify-center gap-3">
                         <Dialog>
                             <DialogTrigger asChild>
                                 <Button>
@@ -195,7 +195,7 @@ export function ResultsTable({ slug }: ResultsTableProps) {
                         </Button>
                     </div>
 
-                    <p className="text-sm text-muted-foreground text-center mt-4">
+                    <p className="text-muted-foreground mt-4 text-center text-sm">
                         Mau bandingin yang lain? Duplikat sesi ini atau bikin yang baru.
                     </p>
                 </CardContent>
@@ -207,28 +207,28 @@ export function ResultsTable({ slug }: ResultsTableProps) {
                     <CardTitle>Statistik</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div className="grid grid-cols-2 gap-4 text-center md:grid-cols-4">
                         <div>
-                            <div className="text-2xl font-bold text-primary">{session.items.length}</div>
-                            <div className="text-sm text-muted-foreground">Item Dibandingin</div>
+                            <div className="text-primary text-2xl font-bold">{session.items.length}</div>
+                            <div className="text-muted-foreground text-sm">Item Dibandingin</div>
                         </div>
                         <div>
-                            <div className="text-2xl font-bold text-primary">
+                            <div className="text-primary text-2xl font-bold">
                                 {results ? results.reduce((sum, r) => sum + r.appearances, 0) : 0}
                             </div>
-                            <div className="text-sm text-muted-foreground">Total Perbandingan</div>
+                            <div className="text-muted-foreground text-sm">Total Perbandingan</div>
                         </div>
                         <div>
-                            <div className="text-2xl font-bold text-primary">
+                            <div className="text-primary text-2xl font-bold">
                                 {results ? Math.max(...results.map((r) => r.winRate)) : 0}%
                             </div>
-                            <div className="text-sm text-muted-foreground">Win Rate Tertinggi</div>
+                            <div className="text-muted-foreground text-sm">Win Rate Tertinggi</div>
                         </div>
                         <div>
-                            <div className="text-2xl font-bold text-primary">
+                            <div className="text-primary text-2xl font-bold">
                                 {results ? Math.min(...results.map((r) => r.winRate)) : 0}%
                             </div>
-                            <div className="text-sm text-muted-foreground">Win Rate Terendah</div>
+                            <div className="text-muted-foreground text-sm">Win Rate Terendah</div>
                         </div>
                     </div>
                 </CardContent>

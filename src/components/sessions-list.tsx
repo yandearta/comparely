@@ -44,7 +44,7 @@ export function SessionsList() {
     // Loading state
     if (sessions === undefined) {
         return (
-            <div className="w-full max-w-4xl mx-auto space-y-4">
+            <div className="mx-auto w-full max-w-4xl space-y-4">
                 <SessionsHeader />
                 <div className="grid gap-4">
                     {[1].map((i) => (
@@ -57,11 +57,11 @@ export function SessionsList() {
 
     if (!sessions || sessions.length === 0) {
         return (
-            <div className="w-full max-w-4xl mx-auto space-y-4">
+            <div className="mx-auto w-full max-w-4xl space-y-4">
                 <SessionsHeader />
-                <Card className="w-full max-w-4xl mx-auto">
+                <Card className="mx-auto w-full max-w-4xl">
                     <CardContent className="flex flex-col items-center justify-center py-12">
-                        <div className="text-center space-y-2">
+                        <div className="space-y-2 text-center">
                             <h3 className="text-lg font-semibold">Belum ada apa-apa nih</h3>
                             <p className="text-muted-foreground">Yuk bikin yang pertama!</p>
                         </div>
@@ -115,12 +115,12 @@ export function SessionsList() {
 
     return (
         <>
-            <div className="w-full max-w-4xl mx-auto space-y-4">
+            <div className="mx-auto w-full max-w-4xl space-y-4">
                 <SessionsHeader />
 
                 <div className="grid gap-4">
                     {sortedSessions.map((session) => (
-                        <Card key={session.id} className="hover:shadow-md transition-shadow">
+                        <Card key={session.id} className="transition-shadow hover:shadow-md">
                             <CardHeader className="pb-3">
                                 <div className="flex items-start justify-between">
                                     <div className="space-y-1">
@@ -136,7 +136,7 @@ export function SessionsList() {
                             </CardHeader>
 
                             <CardContent className="pt-0">
-                                <div className="flex flex-wrap gap-2 mb-4">
+                                <div className="mb-4 flex flex-wrap gap-2">
                                     {session.items.slice(0, 3).map((item, index) => (
                                         <Badge key={index} variant="outline" className="text-xs">
                                             {item}
@@ -149,7 +149,7 @@ export function SessionsList() {
                                     )}
                                 </div>
 
-                                <div className="flex gap-2 flex-wrap">
+                                <div className="flex flex-wrap gap-2">
                                     <Button size="sm" asChild>
                                         <Link href={`/${session.slug}`}>
                                             {session.isCompleted ? (

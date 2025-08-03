@@ -50,10 +50,10 @@ PlayStation 5`;
     }
 
     return (
-        <Card className="w-full max-w-2xl mx-auto">
+        <Card className="mx-auto w-full max-w-2xl">
             <CardHeader>
                 <CardTitle>Bikin Sesi Baru</CardTitle>
-                <CardDescription>Bingung pilih mana? Bandingin satu-satu aja sampe ketemu jawabannya.</CardDescription>
+                <CardDescription>Mau bandingin apa nih? Masukin aja item-itemnya di bawah.</CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>

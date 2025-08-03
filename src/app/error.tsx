@@ -18,23 +18,23 @@ export default function Error({ error, reset }: ErrorProps) {
     }, [error]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="flex min-h-screen items-center justify-center p-4">
             <Card className="w-full max-w-md">
-                <CardContent className="pt-6 text-center space-y-4">
+                <CardContent className="space-y-4 pt-6 text-center">
                     <div className="flex justify-center">
-                        <AlertTriangle className="size-12 text-destructive" />
+                        <AlertTriangle className="text-destructive size-12" />
                     </div>
                     <h2 className="text-xl font-semibold">Ada yang salah</h2>
                     <p className="text-muted-foreground text-sm">
                         Terjadi error yang tidak terduga. Coba lagi atau refresh halaman.
                     </p>
                     {error && env.NODE_ENV === 'development' && (
-                        <details className="text-left bg-muted p-3 rounded text-xs">
-                            <summary className="cursor-pointer font-medium mb-2">Detail Error</summary>
+                        <details className="bg-muted rounded p-3 text-left text-xs">
+                            <summary className="mb-2 cursor-pointer font-medium">Detail Error</summary>
                             <pre className="overflow-auto whitespace-pre-wrap">{error.message}</pre>
                         </details>
                     )}
-                    <div className="flex gap-2 justify-center">
+                    <div className="flex justify-center gap-2">
                         <Button onClick={reset} variant="outline" size="sm">
                             <RefreshCw />
                             Coba Lagi
