@@ -24,9 +24,9 @@ import { dayjs } from '@/lib/dayjs';
 import type { VotingSession } from '@/lib/db';
 
 export function SessionsList() {
+    const router = useRouter();
     const sessions = useSessions();
     const { deleteSession, duplicateSession } = useSessionActions();
-    const router = useRouter();
 
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [sessionToDelete, setSessionToDelete] = useState<number | null>(null);
@@ -45,11 +45,9 @@ export function SessionsList() {
     if (sessions === undefined) {
         return (
             <div className="w-full max-w-4xl mx-auto space-y-4">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-semibold">Sesi Kamu</h2>
-                </div>
+                <SessionsHeader />
                 <div className="grid gap-4">
-                    {[1, 2, 3].map((i) => (
+                    {[1].map((i) => (
                         <LoadingCard key={i} />
                     ))}
                 </div>
@@ -59,14 +57,17 @@ export function SessionsList() {
 
     if (!sessions || sessions.length === 0) {
         return (
-            <Card className="w-full max-w-2xl mx-auto">
-                <CardContent className="flex flex-col items-center justify-center py-12">
-                    <div className="text-center space-y-2">
-                        <h3 className="text-lg font-semibold">Belum ada apa-apa nih</h3>
-                        <p className="text-muted-foreground">Yuk bikin yang pertama!</p>
-                    </div>
-                </CardContent>
-            </Card>
+            <div className="w-full max-w-4xl mx-auto space-y-4">
+                <SessionsHeader />
+                <Card className="w-full max-w-4xl mx-auto">
+                    <CardContent className="flex flex-col items-center justify-center py-12">
+                        <div className="text-center space-y-2">
+                            <h3 className="text-lg font-semibold">Belum ada apa-apa nih</h3>
+                            <p className="text-muted-foreground">Yuk bikin yang pertama!</p>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         );
     }
 
@@ -78,17 +79,20 @@ export function SessionsList() {
         return a.isCompleted ? 1 : -1;
     });
 
-    async function handleDelete() {
-        if (sessionToDelete) {
-            await deleteSession(sessionToDelete);
-            setDeleteDialogOpen(false);
-            setSessionToDelete(null);
-        }
+    async function handleDuplicate(sessionId: number) {
+        const newSession = await duplicateSession(sessionId);
+        toast.success('Sip, udah diduplikat!');
+        router.push(`/${newSession.slug}`);
     }
 
-    function handleEdit(session: VotingSession) {
+    function openEditDialog(session: VotingSession) {
         setSessionToEdit(session);
         setEditDialogOpen(true);
+    }
+
+    function openDeleteDialog(sessionId: number) {
+        setSessionToDelete(sessionId);
+        setDeleteDialogOpen(true);
     }
 
     function handleEditSuccess() {
@@ -101,23 +105,18 @@ export function SessionsList() {
         setSessionToEdit(null);
     }
 
-    async function handleDuplicate(sessionId: number) {
-        const newSession = await duplicateSession(sessionId);
-        toast.success('Sip, udah diduplikat!');
-        router.push(`/${newSession.slug}`);
-    }
-
-    function openDeleteDialog(sessionId: number) {
-        setSessionToDelete(sessionId);
-        setDeleteDialogOpen(true);
+    async function handleDelete() {
+        if (sessionToDelete) {
+            await deleteSession(sessionToDelete);
+            setDeleteDialogOpen(false);
+            setSessionToDelete(null);
+        }
     }
 
     return (
         <>
             <div className="w-full max-w-4xl mx-auto space-y-4">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-semibold">Sesi Kamu</h2>
-                </div>
+                <SessionsHeader />
 
                 <div className="grid gap-4">
                     {sortedSessions.map((session) => (
@@ -156,7 +155,7 @@ export function SessionsList() {
                                             {session.isCompleted ? (
                                                 <>
                                                     <BarChart3 />
-                                                    Lihat Hasil
+                                                    Liat Hasil
                                                 </>
                                             ) : (
                                                 <>
@@ -176,7 +175,7 @@ export function SessionsList() {
                                         Duplikat
                                     </Button>
 
-                                    <Button size="sm" variant="outline" onClick={() => handleEdit(session)}>
+                                    <Button size="sm" variant="outline" onClick={() => openEditDialog(session)}>
                                         <Edit />
                                         Edit
                                     </Button>
@@ -228,5 +227,13 @@ export function SessionsList() {
                 </DialogContent>
             </Dialog>
         </>
+    );
+}
+
+function SessionsHeader() {
+    return (
+        <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold">Sesi Kamu</h2>
+        </div>
     );
 }
