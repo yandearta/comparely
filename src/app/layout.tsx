@@ -9,7 +9,6 @@ export const metadata: Metadata = {
     title: 'Comparely — Biar Nggak Salah Pilih',
     description:
         'Kadang bingung milih karena kebanyakan pilihan? Bandingin pelan-pelan, satu lawan satu, biar nemu yang bener-bener cocok.',
-    icons: [{ rel: 'icon', url: '/favicon.ico' }],
 };
 
 const geist = Geist({
