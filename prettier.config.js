@@ -1,4 +1,4 @@
-/** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions & import('@trivago/prettier-plugin-sort-imports').PluginConfig} */
+/** @type {import('prettier').Config & import('@trivago/prettier-plugin-sort-imports').PluginConfig & import('prettier-plugin-tailwindcss').PluginOptions} */
 const config = {
     printWidth: 120,
     tabWidth: 4,
@@ -8,7 +8,10 @@ const config = {
     importOrder: ['^(\\@/)(.*)$', '^[./]'],
     importOrderSeparation: true,
     importOrderSortSpecifiers: true,
-    plugins: ['prettier-plugin-tailwindcss', '@trivago/prettier-plugin-sort-imports'],
+    plugins: [
+        '@trivago/prettier-plugin-sort-imports',
+        'prettier-plugin-tailwindcss', // MUST come last
+    ],
 };
 
 export default config;
