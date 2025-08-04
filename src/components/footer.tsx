@@ -1,12 +1,13 @@
 import { ExternalLink } from 'lucide-react';
 
+import { ModeToggle } from './mode-toggle';
 import { Card, CardContent } from './ui/card';
 
 export function Footer() {
     return (
         <footer className="mx-auto w-full max-w-4xl">
             <Card>
-                <CardContent>
+                <CardContent className="flex items-center justify-between">
                     <p>
                         Made with ❤️ by{' '}
                         <a
@@ -18,6 +19,8 @@ export function Footer() {
                             @yandearta <ExternalLink className="size-4" />
                         </a>
                     </p>
+
+                    <ModeToggle />
                 </CardContent>
             </Card>
         </footer>

@@ -1,6 +1,7 @@
 import { type Metadata } from 'next';
 import { Geist } from 'next/font/google';
 
+import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { env } from '@/env';
 import { cn } from '@/lib/utils';
@@ -20,10 +21,17 @@ const geist = Geist({
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="id" className={cn('scroll-smooth', geist.variable)} data-scroll-behavior="smooth">
+        <html
+            lang="id"
+            className={cn('scroll-smooth', geist.variable)}
+            data-scroll-behavior="smooth"
+            suppressHydrationWarning
+        >
             <body>
-                <Toaster theme="light" richColors />
-                {children}
+                <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+                    <Toaster richColors />
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     );
