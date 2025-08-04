@@ -44,7 +44,7 @@ export function SessionsList() {
     // Loading state
     if (sessions === undefined) {
         return (
-            <div className="mx-auto w-full max-w-4xl space-y-4">
+            <div className="mx-auto space-y-4">
                 <SessionsHeader />
                 <div className="grid gap-4">
                     {[1].map((i) => (
@@ -57,7 +57,7 @@ export function SessionsList() {
 
     if (!sessions || sessions.length === 0) {
         return (
-            <div className="mx-auto w-full max-w-4xl space-y-4">
+            <div className="mx-auto space-y-4">
                 <SessionsHeader />
                 <Card className="mx-auto w-full max-w-4xl">
                     <CardContent className="flex flex-col items-center justify-center py-12">
@@ -115,7 +115,7 @@ export function SessionsList() {
 
     return (
         <>
-            <div className="mx-auto w-full max-w-4xl space-y-4">
+            <div className="mx-auto space-y-4">
                 <SessionsHeader />
 
                 <div className="grid gap-4">

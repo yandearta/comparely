@@ -35,7 +35,7 @@ export function ResultsTable({ slug }: ResultsTableProps) {
 
     if (!session) {
         return (
-            <Card className="mx-auto w-full max-w-2xl">
+            <Card className="mx-auto">
                 <CardContent className="flex items-center justify-center py-12">
                     <div className="text-center">
                         <h3 className="text-lg font-semibold">Eh, nggak ketemu</h3>
@@ -70,21 +70,36 @@ export function ResultsTable({ slug }: ResultsTableProps) {
     }
 
     function getRankIcon(index: number) {
-        if (index === 0) return <Trophy className="size-5 text-yellow-500" />;
-        if (index === 1) return <Medal className="size-5 text-gray-400" />;
-        if (index === 2) return <Award className="size-5 text-amber-600" />;
+        if (index === 0) return <Trophy className="size-5 text-yellow-500 dark:text-yellow-400" />;
+        if (index === 1) return <Medal className="size-5 text-slate-500 dark:text-slate-400" />;
+        if (index === 2) return <Award className="size-5 text-amber-600 dark:text-amber-500" />;
         return null;
     }
 
     function getRankBadge(index: number) {
-        if (index === 0) return <Badge className="bg-yellow-500 hover:bg-yellow-600">1st</Badge>;
-        if (index === 1) return <Badge className="bg-gray-500 hover:bg-gray-600">2nd</Badge>;
-        if (index === 2) return <Badge className="bg-amber-600 hover:bg-amber-700">3rd</Badge>;
+        if (index === 0)
+            return (
+                <Badge className="bg-yellow-500 text-white hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700">
+                    1st
+                </Badge>
+            );
+        if (index === 1)
+            return (
+                <Badge className="bg-slate-500 text-white hover:bg-slate-600 dark:bg-slate-600 dark:hover:bg-slate-700">
+                    2nd
+                </Badge>
+            );
+        if (index === 2)
+            return (
+                <Badge className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800">
+                    3rd
+                </Badge>
+            );
         return <Badge variant="outline">{index + 1}th</Badge>;
     }
 
     return (
-        <div className="mx-auto w-full max-w-6xl space-y-6">
+        <div className="mx-auto space-y-6">
             {/* Header */}
             <div className="space-y-4">
                 <Button variant="outline" size="sm" asChild>
@@ -101,14 +116,16 @@ export function ResultsTable({ slug }: ResultsTableProps) {
 
             {/* Winner Card */}
             {results && results.length > 0 && results[0] && (
-                <Card className="border-2 border-yellow-300 bg-yellow-50">
+                <Card className="border-2 border-yellow-300 bg-yellow-50 dark:border-yellow-600 dark:bg-yellow-950/50">
                     <CardHeader className="text-center">
                         <div className="mb-2 flex items-center justify-center gap-2">
                             {getRankIcon(0)}
                             <CardTitle className="text-2xl">Pemenang!</CardTitle>
                         </div>
                         <div className="mb-2 min-w-0">
-                            <p className="text-4xl font-bold break-words text-yellow-600">{results[0].item}</p>
+                            <p className="text-4xl font-bold break-words text-yellow-600 dark:text-yellow-400">
+                                {results[0].item}
+                            </p>
                         </div>
                         <div className="text-muted-foreground text-lg">
                             Win Rate: {results[0].winRate}% ({results[0].wins}/{results[0].appearances})

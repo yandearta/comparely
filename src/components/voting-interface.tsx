@@ -97,7 +97,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
     // Loading state
     if (session === undefined || progress === undefined) {
         return (
-            <div className="mx-auto w-full max-w-4xl">
+            <div className="mx-auto">
                 <LoadingSpinner message="Memuat..." />
             </div>
         );
@@ -105,7 +105,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
 
     if (!session) {
         return (
-            <Card className="mx-auto w-full max-w-2xl">
+            <Card className="mx-auto">
                 <CardContent className="flex items-center justify-center py-12">
                     <div className="text-center">
                         <h3 className="text-lg font-semibold">Eh, nggak ketemu</h3>
@@ -121,14 +121,14 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
 
     if (showCompletionMessage) {
         return (
-            <Card className="mx-auto w-full max-w-2xl">
+            <Card className="mx-auto">
                 <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                    <CheckCircle className="mb-4 h-16 w-16 text-green-500" />
+                    <CheckCircle className="mb-4 size-16" />
                     <h2 className="mb-2 text-2xl font-semibold">Voting Selesai!</h2>
                     <p className="text-muted-foreground mb-4">
                         Semua perbandingan sudah selesai. Mengarahkan ke halaman hasil...
                     </p>
-                    <div className="border-primary h-4 w-4 animate-spin rounded-full border-2 border-t-transparent" />
+                    <div className="border-primary size-4 animate-spin rounded-full border-2 border-t-transparent" />
                 </CardContent>
             </Card>
         );
@@ -136,7 +136,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
 
     if (!nextComparison) {
         return (
-            <Card className="mx-auto w-full max-w-2xl">
+            <Card className="mx-auto">
                 <CardContent className="flex items-center justify-center py-12">
                     <div className="text-center">
                         <h3 className="text-lg font-semibold">Udah selesai!</h3>
@@ -156,7 +156,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
     }
 
     return (
-        <div className="mx-auto w-full max-w-4xl space-y-6">
+        <div className="mx-auto space-y-6">
             {/* Header */}
             <div className="space-y-4">
                 <div className="flex items-center justify-between">

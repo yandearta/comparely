@@ -3,6 +3,7 @@
 import { notFound } from 'next/navigation';
 import { useParams } from 'next/navigation';
 
+import { Footer } from '@/components/footer';
 import { ResultsTable } from '@/components/results-table';
 import { VotingInterface } from '@/components/voting-interface';
 import { useSessionBySlug } from '@/hooks/use-database';
@@ -30,8 +31,9 @@ export default function SessionPage() {
 
     return (
         <main className="min-h-screen py-8">
-            <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-5xl space-y-6 px-4">
                 {session.isCompleted ? <ResultsTable slug={slug} /> : <VotingInterface slug={slug} />}
+                <Footer />
             </div>
         </main>
     );

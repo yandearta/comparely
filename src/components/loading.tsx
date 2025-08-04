@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 export function LoadingSpinner({ message = 'Memuat...' }: { message?: string }) {
     return (
-        <Card className="mx-auto w-full max-w-2xl">
+        <Card className="mx-auto">
             <CardContent className="flex flex-col items-center justify-center py-12">
                 <div className="border-primary mb-4 h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
                 <p className="text-muted-foreground">{message}</p>

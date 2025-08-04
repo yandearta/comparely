@@ -5,7 +5,7 @@ import { SessionsList } from '@/components/sessions-list';
 export default function HomePage() {
     return (
         <main className="min-h-screen py-8">
-            <div className="container mx-auto space-y-12 px-4">
+            <div className="mx-auto max-w-5xl space-y-12 px-4">
                 {/* Header */}
                 <div className="space-y-4 text-center">
                     <h1 className="text-4xl font-bold md:text-6xl">Comparely</h1>

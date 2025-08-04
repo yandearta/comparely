@@ -5,7 +5,7 @@ import { Card, CardContent } from './ui/card';
 
 export function Footer() {
     return (
-        <footer className="mx-auto w-full max-w-4xl">
+        <footer>
             <Card>
                 <CardContent className="flex items-center justify-between">
                     <p>
