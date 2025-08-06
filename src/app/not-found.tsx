@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
 export const metadata = {
-    title: 'Halaman Tidak Ditemukan',
-    description: 'Halaman yang kamu cari tidak ditemukan.',
+    title: 'Halaman Nggak Ada',
+    description: 'Halaman yang kamu cari nggak ada nih.',
 };
 
 export default function NotFound() {
@@ -19,10 +19,10 @@ export default function NotFound() {
                     </div>
                     <div className="space-y-2">
                         <h1 className="text-3xl font-bold">404</h1>
-                        <h2 className="text-destructive text-xl font-semibold">Halaman Tidak Ditemukan</h2>
+                        <h2 className="text-destructive text-xl font-semibold">Halaman Nggak Ada</h2>
                     </div>
                     <p className="text-muted-foreground text-sm">
-                        Halaman yang kamu cari tidak ada atau telah dipindahkan.
+                        Halaman yang kamu cari nggak ada atau udah dipindahin.
                     </p>
                     <div className="flex justify-center">
                         <Button asChild size="sm">

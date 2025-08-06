@@ -201,7 +201,7 @@ export function SessionsList() {
                     <DialogHeader>
                         <DialogTitle>Hapus Sesi</DialogTitle>
                         <DialogDescription>
-                            Yakin mau hapus sesi voting ini? Aksi ini tidak bisa dibatalkan.
+                            Yakin mau hapus sesi voting ini? Nggak bisa dibatalin lagi lho.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>

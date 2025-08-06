@@ -26,7 +26,7 @@ export default function Error({ error, reset }: ErrorProps) {
                     </div>
                     <h2 className="text-xl font-semibold">Ada yang salah</h2>
                     <p className="text-muted-foreground text-sm">
-                        Terjadi error yang tidak terduga. Coba lagi atau refresh halaman.
+                        Ada error nih yang nggak terduga. Coba lagi atau refresh halamannya.
                     </p>
                     {error && env.NODE_ENV === 'development' && (
                         <details className="bg-muted rounded p-3 text-left text-xs">

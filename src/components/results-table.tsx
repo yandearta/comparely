@@ -41,7 +41,7 @@ export function ResultsTable({ slug }: ResultsTableProps) {
                         <h3 className="text-lg font-semibold">Eh, nggak ketemu</h3>
                         <p className="text-muted-foreground">Sesi yang kamu cari nggak ada nih.</p>
                         <Button className="mt-4" asChild>
-                            <Link href="/">Kembali ke Beranda</Link>
+                            <Link href="/">Balik ke Beranda</Link>
                         </Button>
                     </div>
                 </CardContent>

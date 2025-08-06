@@ -60,7 +60,7 @@ export function EditSessionForm({ session, onSuccess, onCancel }: EditSessionFor
             }
             onSuccess?.();
         } catch (error) {
-            toast.error('Gagal mengupdate sesi');
+            toast.error('Wah, gagal update sesi');
             console.error('Failed to update session:', error);
         }
     }
@@ -69,7 +69,7 @@ export function EditSessionForm({ session, onSuccess, onCancel }: EditSessionFor
         <>
             <DialogHeader>
                 <DialogTitle>Edit Sesi</DialogTitle>
-                <DialogDescription>Ubah judul dan item yang akan dibandingkan dalam sesi ini.</DialogDescription>
+                <DialogDescription>Ubah judul dan item yang mau dibandingin di sesi ini.</DialogDescription>
             </DialogHeader>
 
             <Form {...form}>

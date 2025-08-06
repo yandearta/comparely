@@ -125,9 +125,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                 <CardContent className="flex flex-col items-center justify-center py-12 text-center">
                     <CheckCircle className="mb-4 size-16" />
                     <h2 className="mb-2 text-2xl font-semibold">Voting Selesai!</h2>
-                    <p className="text-muted-foreground mb-4">
-                        Semua perbandingan sudah selesai. Mengarahkan ke halaman hasil...
-                    </p>
+                    <p className="text-muted-foreground mb-4">Semua udah kelar! Bentar ya, pindah ke hasil...</p>
                     <div className="border-primary size-4 animate-spin rounded-full border-2 border-t-transparent" />
                 </CardContent>
             </Card>
@@ -140,7 +138,7 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                 <CardContent className="flex items-center justify-center py-12">
                     <div className="text-center">
                         <h3 className="text-lg font-semibold">Udah selesai!</h3>
-                        <p className="text-muted-foreground">Nggak ada lagi yang perlu dibandingin.</p>
+                        <p className="text-muted-foreground">Udah selesai semua nih!</p>
                         <div className="mt-4 flex justify-center gap-2">
                             <Button asChild>
                                 <Link href={`/${slug}`}>Liat Hasil</Link>
@@ -227,25 +225,25 @@ export function VotingInterface({ slug }: VotingInterfaceProps) {
                         <div className="hidden md:block">
                             <p className="flex items-center justify-center gap-4 text-xs">
                                 <span>
-                                    Tekan{' '}
+                                    Pencet{' '}
                                     <kbd className="bg-background text-foreground rounded border px-1 py-0.5">1</kbd>{' '}
                                     atau{' '}
                                     <kbd className="bg-background text-foreground rounded border px-1 py-0.5">←</kbd>{' '}
-                                    untuk Opsi A
+                                    buat Opsi A
                                 </span>
                                 <span>
-                                    Tekan{' '}
+                                    Pencet{' '}
                                     <kbd className="bg-background text-foreground rounded border px-1 py-0.5">2</kbd>{' '}
                                     atau{' '}
                                     <kbd className="bg-background text-foreground rounded border px-1 py-0.5">→</kbd>{' '}
-                                    untuk Opsi B
+                                    buat Opsi B
                                 </span>
                                 <span>
-                                    Tekan{' '}
+                                    Pencet{' '}
                                     <kbd className="bg-background text-foreground rounded border px-1 py-0.5">
                                         Ctrl+U
                                     </kbd>{' '}
-                                    untuk batalkan
+                                    buat undo
                                 </span>
                             </p>
                         </div>
@@ -280,7 +278,7 @@ function VotingCard({ label, item, onVote, ariaLabel }: VotingCardProps) {
                         size="lg"
                         aria-label={ariaLabel}
                     >
-                        Pilih yang Ini
+                        Pilih ini
                     </Button>
                 </div>
             </CardContent>
