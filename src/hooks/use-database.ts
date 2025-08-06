@@ -23,7 +23,16 @@ export function useSessions() {
 
 // Hook to get specific session by slug
 export function useSessionBySlug(slug: string | null) {
-    return useLiveQuery(() => (slug ? DatabaseService.getSessionBySlug(slug) : undefined), [slug]);
+    return useLiveQuery(async () => {
+        if (!slug) return undefined;
+        try {
+            const session = await DatabaseService.getSessionBySlug(slug);
+            return session ?? null;
+        } catch (error) {
+            console.error('Error fetching session by slug:', error);
+            return null;
+        }
+    }, [slug]);
 }
 
 // Hook to get next comparison
